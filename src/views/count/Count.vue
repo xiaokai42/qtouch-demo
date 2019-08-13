@@ -29,7 +29,7 @@
           </template>
         </el-table-column>
       </el-table-column>
-      <el-table-column label="装饰工程">
+      <el-table-column label="装修工程">
       	<el-table-column prop="decorationCount" width="60" label="数量"></el-table-column>
       	<el-table-column prop="decorationArea" label="装修面积/万㎡">
           <template slot-scope="scope">
@@ -72,9 +72,9 @@
             </template>
           </el-table-column>
         </el-table-column>
-        <el-table-column label="装饰工程">
+        <el-table-column label="装修工程">
         	<el-table-column prop="decorationCount" label="数量" width="70"></el-table-column>
-        	<el-table-column prop="decorationArea" label="装饰面积/万㎡">
+        	<el-table-column prop="decorationArea" label="装修面积/万㎡">
             <template slot-scope="scope">
               <span>{{scope.row.decorationArea | rounding}}</span>
             </template>

@@ -3,7 +3,7 @@
     <div class="box-header">
       <el-checkbox-group v-model="types" size="small" @change="changeType">
         <el-checkbox-button label="建筑工程"></el-checkbox-button>
-        <el-checkbox-button label="装饰工程"></el-checkbox-button>
+        <el-checkbox-button label="装修工程"></el-checkbox-button>
         <el-checkbox-button label="市政工程"></el-checkbox-button>
       </el-checkbox-group>
       <el-date-picker v-model="date" align="right" type="daterange" unlink-panels range-separator="-"
@@ -49,8 +49,8 @@
       	<el-form-item label="设计单位">{{ dialog.form.architect }}</el-form-item>
       	<el-form-item label="项目地址">{{ dialog.form.projectAddress }}</el-form-item>
         <el-form-item label="建筑总面积" v-show="dialog.typeShow1">{{ dialog.form.overallFloorage }} 万㎡</el-form-item>
-        <el-form-item label="装饰面积" v-show="dialog.typeShow2">{{ dialog.form.decorateArea }} 万㎡</el-form-item>
-        <el-form-item label="装饰投资" v-show="dialog.typeShow2">{{ dialog.form.decorationInvestment }} 万元</el-form-item>
+        <el-form-item label="装修面积" v-show="dialog.typeShow2">{{ dialog.form.decorateArea }} 万㎡</el-form-item>
+        <el-form-item label="装修投资" v-show="dialog.typeShow2">{{ dialog.form.decorationInvestment }} 万元</el-form-item>
         <el-form-item label="概算总投资" v-show="dialog.typeShow3">{{ dialog.form.totalMoney }} 万元</el-form-item>
       </el-form>
     </el-dialog>
@@ -148,7 +148,7 @@ export default class ProjectList extends Vue {
       this.dialog.typeShow1 = true;
       this.dialog.typeShow2 = false;
       this.dialog.typeShow3 = false;
-    } else if (row.projectType == "装饰工程") {
+    } else if (row.projectType == "装修工程") {
       this.dialog.typeShow1 = false;
       this.dialog.typeShow2 = true;
       this.dialog.typeShow3 = false;
