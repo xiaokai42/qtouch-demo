@@ -106,6 +106,7 @@
 import { Vue, Component } from "vue-property-decorator";
 import cityJson from "@/assets/json/city.json";
 import Http from "@/utils/Http";
+import store from "@/store";
 import Url from "@/api/url";
 import qs from "qs";
 
@@ -270,7 +271,12 @@ export default class Count extends Vue {
       method: "get",
       url: "api/excel/download",
       responseType: "blob",
-      params: this.search
+      params: this.search,
+      headers: {
+        "X-Requested-With": "XMLHttpRequest",
+        accessToken: "Bearer " + store.getters[`getToken`],
+        "Content-Type": "multipart/form-data"
+      }
     }).then((res: any) => {
       this.doLoading = false;
       if (res.status) {
