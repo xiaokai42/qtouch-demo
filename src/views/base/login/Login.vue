@@ -18,6 +18,11 @@
               <el-input type="password" v-model="account.password" clearable prefix-icon="el-icon-lock"
                 @on-enter="handleSubmit(`loginRef`)" name="password" placeholder="Password"></el-input>
             </el-form-item>
+            <el-form-item prop="captcha" class="form-item">
+              <el-input type="text" v-model="account.captcha" name="captcha"
+                prefix-icon="el-icon-circle-check" placeholder="Captcha" class="captcha"></el-input>
+              <img :src="imgUrl" width="80" height="40" alt="Captcha" @click="getCaptcha" title="点击切换验证码" />
+            </el-form-item>
             <el-form-item>
               <el-button type="primary" @click="handleSubmit(`loginRef`)" style="width: 100%;">登录</el-button>
             </el-form-item>
@@ -38,13 +43,19 @@ import { Mutation } from "vuex-class";
 const namespace: string = "base";
 
 @Component({
-  components: {}
+  components: {},
+  mounted() {
+    this.getCaptcha();
+  }
 })
 export default class Login extends Vue {
   account: any = {
     username: "",
-    password: ""
+    password: "",
+    captcha: ""
   };
+  imgUrl: string = "";
+  captchaToken: string = "";
 
   ruleCustom: any = {
     username: [
@@ -58,6 +69,13 @@ export default class Login extends Vue {
         validator: this.validatePassword,
         trigger: "blur"
       }
+    ],
+    captcha: [
+      {
+        required: true,
+        message: '请输入验证码',
+        trigger: "blur"
+      }
     ]
   };
 
@@ -69,6 +87,13 @@ export default class Login extends Vue {
   setUserName!: any;
   @Mutation("saveMenu")
   saveMenu!: any;
+
+  getCaptcha(): void {
+    this.$axios.get('/api/captcha/get').then((res: any) => {
+      this.imgUrl = 'data:image/png;base64,' + res.data.data.img;
+      this.captchaToken = res.data.data.token;
+    });
+  }
 
   validateUsername(rule: any, value: string, callback: Function): void {
     if (value === "" || value.toString().trim() === "") {
@@ -95,14 +120,18 @@ export default class Login extends Vue {
 
     loginRef.validate((valid: boolean) => {
       if (valid) {
-        this.$axios.post(
-          Url.base.login,
-          qs.stringify({
+        this.$axios({
+          method: "post",
+          url: Url.base.login,
+          data: qs.stringify({
             username: userName,
             password: password
-          })
-        )
-          .then((response: any) => {
+          }),
+          headers: {
+            captcha: this.account.captcha,
+            captchaToken: this.captchaToken
+          }
+        }).then((response: any) => {
             if (response.data.status) {
               let token = response.data.data.accessToken;
               this.saveToken(token);
@@ -164,7 +193,15 @@ export default class Login extends Vue {
       .form-box {
         width: 100%;
         height: 200px;
-        margin: 40px 0 20px 0;
+        margin: 20px 0;
+      }
+      .captcha {
+        width: 200px;
+      }
+      img {
+        cursor: pointer;
+        margin-left: 20px;
+        vertical-align: -15px;
       }
     }
   }
