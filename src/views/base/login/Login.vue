@@ -95,7 +95,7 @@ export default class Login extends Vue {
 
     loginRef.validate((valid: boolean) => {
       if (valid) {
-        Http.post(
+        this.$axios.post(
           Url.base.login,
           qs.stringify({
             username: userName,
