@@ -46,6 +46,8 @@ const namespace: string = "base";
   components: {},
   mounted() {
     this.getCaptcha();
+    this.$store.state.menu = {};
+    this.$store.state.userInfo.token = "";
   }
 })
 export default class Login extends Vue {

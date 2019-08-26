@@ -11,9 +11,7 @@
         </p>
         <div class="error404-btn-con">
           <Button @click="goHome" size="large" style="width: 200px;" type="text">返回首页</Button>
-          <Button @click="backPage" size="large" style="width: 200px;margin-left: 40px;" type="primary"
-            >返回上一页</Button
-          >
+          <!-- <Button @click="backPage" size="large" style="width: 200px;margin-left: 40px;" type="primary">返回上一页</Button> -->
         </div>
       </Card>
     </div>
@@ -30,7 +28,7 @@ export default class App extends Vue {
   }
   goHome() {
     this.$router.push({
-      name: "home"
+      name: "count"
     });
   }
 }

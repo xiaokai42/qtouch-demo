@@ -43,6 +43,41 @@ Vue.config.productionTip = false;
 Vue.config.performance = NODE_ENV === "development";
 Vue.config.devtools = NODE_ENV !== "production";
 
+router.beforeEach((to, from, next) => {
+  let paths: any[] = store.getters[`getMenu`];
+  if (to.path === "/login") {
+    next();
+  } else {
+    if (Object.keys(paths).length === 0) {
+      if (to.path == "/403" || to.path == "/404" || to.path == "/500") {
+        next();
+      } else {
+        next("/403");
+      }
+    } else {
+      if (paths.some((i: any) => i.path === to.path && !i.children)) {
+        next();
+      } else {
+        let subMenu: any[] = [];
+        paths.map((i: any) => {
+          if (i.children && i.children !== []) {
+            subMenu.push(...i.children);
+          }
+        });
+        if (subMenu.some((i: any) => i.path === to.path)) {
+          next();
+        } else {
+          if (to.path == "/403" || to.path == "/404" || to.path == "/500") {
+            next();
+          } else {
+            next("/403");
+          }
+        }
+      }
+    }
+  }
+})
+
 const vm = new Vue({
   router,
   store,

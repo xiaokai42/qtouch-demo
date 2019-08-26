@@ -14,10 +14,8 @@
         </div>
         <p class="error403-body-con-message">You don't have permission</p>
         <div class="error403-btn-con">
-          <Button @click="goHome" size="large" style="width: 200px;" type="text">返回首页</Button>
-          <Button @click="backPage" size="large" style="width: 200px;margin-left: 40px;" type="primary"
-            >返回上一页</Button
-          >
+          <Button @click="goHome" size="large" style="width: 200px;" type="text">返回登录页</Button>
+          <!-- <Button @click="backPage" size="large" style="width: 200px;margin-left: 40px;" type="primary">返回上一页</Button> -->
         </div>
       </Card>
     </div>
@@ -34,7 +32,7 @@ export default class App extends Vue {
   }
   goHome() {
     this.$router.push({
-      name: "home"
+      name: "login"
     });
   }
 }

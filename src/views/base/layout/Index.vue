@@ -85,7 +85,7 @@
 </template>
 
 <script lang="ts">
-import { Component, Vue } from "vue-property-decorator";
+import { Component, Vue, Watch } from "vue-property-decorator";
 import { Getter, Mutation } from "vuex-class";
 import Http from "@/utils/Http";
 import Url from "@/api/url";
@@ -113,6 +113,11 @@ export default class Index extends Vue {
   isLogin!: any;
   @Mutation("clearAll")
   clearAll!: any;
+
+  /* @Watch("$route", { deep: true })
+  checkRoute(newVal: any) {
+    this.checkRoutePath(newVal.path);
+  } */
 
   // 退出系统
   logoutSystem() {
@@ -161,6 +166,25 @@ export default class Index extends Vue {
     }
     this.fullscreen = !this.fullscreen;
   }
+
+  /* checkRoutePath(route: string) {
+    let paths: any[] = this.menuData;
+    if (paths.some((i: any) => i.path === route && !i.children)) {
+      this.$router.push({ path: route });
+    } else {
+      let subMenu: any[] = [];
+      paths.map((i: any) => {
+        if (i.children && i.children !== []) {
+          subMenu.push(...i.children);
+        }
+      });
+      if (subMenu.some((i: any) => i.path === route)) {
+        this.$router.push({ path: route });
+      } else {
+        this.$router.push({ path: "/403" });
+      }
+    }
+  } */
 
   get layoutBodyClasses() {
     let classes = "";
