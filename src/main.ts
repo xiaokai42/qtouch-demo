@@ -67,7 +67,8 @@ router.beforeEach((to, from, next) => {
         if (subMenu.some((i: any) => i.path === to.path)) {
           next();
         } else {
-          if (to.path == "/403" || to.path == "/404" || to.path == "/500") {
+          if (to.path == "/403" || to.path == "/404" || to.path == "/500" 
+            || to.path == "/mine" || to.path == "/changePassword") {
             next();
           } else {
             next("/403");

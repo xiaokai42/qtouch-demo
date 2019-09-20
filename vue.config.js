@@ -13,7 +13,7 @@ var debug = process.env.NODE_ENV !== "production";
 // var API_URL = process.env.VUE_APP_API_URL;
 
 const localPath = "http://127.0.0.1:8080"; // 本机地址
-const netPath = "http://192.168.1.148:8081"; // server地址 "http://172.30.33.128:8081";
+const netPath = "http://172.30.33.128:8081"; // server地址 "http://172.30.33.128:8081 172.30.41.136";
 
 var serverPath = netPath;
 
