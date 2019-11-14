@@ -49,7 +49,7 @@ router.beforeEach((to, from, next) => {
     next();
   } else {
     if (Object.keys(paths).length === 0) {
-      if (to.path == "/403" || to.path == "/404" || to.path == "/500") {
+      if (to.path == "/403" || to.path == "/404" || to.path == "/500" || to.path == "/single-sign-on") {
         next();
       } else {
         next("/403");
@@ -67,8 +67,8 @@ router.beforeEach((to, from, next) => {
         if (subMenu.some((i: any) => i.path === to.path)) {
           next();
         } else {
-          if (to.path == "/403" || to.path == "/404" || to.path == "/500" 
-            || to.path == "/mine" || to.path == "/changePassword") {
+          if (to.path == "/403" || to.path == "/404" || to.path == "/500"
+            || to.path == "/mine" || to.path == "/changePassword" || to.path == "/single-sign-on") {
             next();
           } else {
             next("/403");

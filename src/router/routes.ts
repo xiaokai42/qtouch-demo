@@ -36,6 +36,11 @@ const routes: Array<any> = [
     name: "500",
     component: () => import(/* webpackChunkName: "500" */ "@/views/base/error_page/500.vue")
   },
+  {
+    path: "/single-sign-on",
+    name: "single-sign-on",
+    component: () => import(/* webpackChunkName: "500" */ "@/views/count/SingleSignOn.vue")
+  },
   ...base
 ];
 
