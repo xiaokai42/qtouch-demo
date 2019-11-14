@@ -22,7 +22,7 @@ import { Mutation } from "vuex-class";
 })
 
 export default class Count extends Vue {
-  code: string = 'AQIC5wM2LY4SfczvKpC_LEajBG4oWcgRWQ3abwVE5S73-e8.*AAJTSQACMDEAAlNLABM0MjkwNzE0NjE3MTY2MjIzNzYx*';
+  code: string = '';
 
   @Mutation("saveToken")
   saveToken!: any;
@@ -35,6 +35,7 @@ export default class Count extends Vue {
 
   // 请求表格数据
   getTestMessages() {
+    this.code = this.$route.query.tokenId;
     let url = "api/token?token="+this.code;
     this.$axios({
       method: "get",
