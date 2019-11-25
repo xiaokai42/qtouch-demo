@@ -128,6 +128,12 @@ export default class ProjectList extends Vue {
       this.pagination.query.beginTime = '';
       this.pagination.query.endTime = '';
     }
+    let projectCode = this.$route.params.projectCode;
+    let projectSubCode = this.$route.params.projectSubCode;
+    if (projectCode && projectSubCode) {
+      this.pagination.query.projectCode = projectCode;
+      this.pagination.query.projectSubCode = projectSubCode;
+    }
     Http.post("api/project/info", this.pagination).then((res: any) => {
       this.loading = false;
       if (res.status) {
