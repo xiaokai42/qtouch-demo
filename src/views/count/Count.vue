@@ -31,22 +31,25 @@
       </el-table-column>
       <el-table-column label="装修工程">
       	<el-table-column prop="decorationCount" width="60" label="数量"></el-table-column>
-      	<el-table-column prop="decorationArea" label="装修面积/万㎡">
+      	<el-table-column prop="decorationArea" label="总建筑面积/万㎡">
           <template slot-scope="scope">
             <span>{{scope.row.decorationArea | rounding}}</span>
-          </template>
-        </el-table-column>
-        <el-table-column prop="decorationCost" label="投资/万元">
-          <template slot-scope="scope">
-            <span>{{scope.row.decorationCost | rounding}}</span>
           </template>
         </el-table-column>
       </el-table-column>
       <el-table-column label="市政工程">
       	<el-table-column prop="municipalCount" width="60" label="数量"></el-table-column>
-      	<el-table-column prop="municipalCost" label="投资/万元">
+      	<el-table-column prop="municipalCost" label="概算总投资/万元">
           <template slot-scope="scope">
             <span>{{scope.row.municipalCost | rounding}}</span>
+          </template>
+        </el-table-column>
+      </el-table-column>
+      <el-table-column label="其他工程">
+      	<el-table-column prop="otherCount" width="60" label="数量"></el-table-column>
+      	<el-table-column prop="otherArea" label="总建筑面积/万㎡">
+          <template slot-scope="scope">
+            <span>{{scope.row.otherArea | rounding}}</span>
           </template>
         </el-table-column>
       </el-table-column>

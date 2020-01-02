@@ -5,6 +5,7 @@
         <el-checkbox-button label="建筑工程"></el-checkbox-button>
         <el-checkbox-button label="装修工程"></el-checkbox-button>
         <el-checkbox-button label="市政工程"></el-checkbox-button>
+        <el-checkbox-button label="其他工程"></el-checkbox-button>
       </el-checkbox-group>
       <el-date-picker v-model="date" align="right" type="daterange" unlink-panels range-separator="-"
         value-format="yyyy-MM-dd" start-placeholder="开始日期" end-placeholder="结束日期" size="small">
@@ -23,10 +24,12 @@
       <el-table-column prop="projectName" label="项目名称" show-overflow-tooltip></el-table-column>
       <el-table-column prop="developmentOrganization" label="建设单位" show-overflow-tooltip></el-table-column>
       <el-table-column prop="architect" label="设计单位" show-overflow-tooltip></el-table-column>
-      <el-table-column prop="projectType" label="项目类型" width="80"></el-table-column>
+      <el-table-column prop="projectType" label="项目类型"></el-table-column>
       <el-table-column prop="area" label="区域" width="120"></el-table-column>
       <el-table-column prop="city" label="区县" width="100"></el-table-column>
-      <el-table-column prop="createTime" label="创建时间" width="90"></el-table-column>
+      <!-- <el-table-column prop="createTime" label="创建时间" width="90"></el-table-column> -->
+      <el-table-column prop="receiveTime" label="受理时间" width="90"></el-table-column>
+      <el-table-column prop="finishTime" label="审批时间" width="90"></el-table-column>
       <el-table-column align="center" label="操作" width="80">
         <template slot-scope="scope">
           <el-button size="mini" type="text" icon="el-icon-document"
@@ -48,9 +51,9 @@
       	<el-form-item label="建设单位">{{ dialog.form.developmentOrganization }}</el-form-item>
       	<el-form-item label="设计单位">{{ dialog.form.architect }}</el-form-item>
       	<el-form-item label="项目地址">{{ dialog.form.projectAddress }}</el-form-item>
+        <el-form-item label="审查编号">{{ dialog.form.reviewNumbers }}</el-form-item>
+        <el-form-item label="审查机构">{{ dialog.form.figureWhoseInstitutions }}</el-form-item>
         <el-form-item label="建筑总面积" v-show="dialog.typeShow1">{{ dialog.form.overallFloorage }} 万㎡</el-form-item>
-        <el-form-item label="装修面积" v-show="dialog.typeShow2">{{ dialog.form.decorateArea }} 万㎡</el-form-item>
-        <el-form-item label="装修投资" v-show="dialog.typeShow2">{{ dialog.form.decorationInvestment }} 万元</el-form-item>
         <el-form-item label="概算总投资" v-show="dialog.typeShow3">{{ dialog.form.totalMoney }} 万元</el-form-item>
       </el-form>
     </el-dialog>
@@ -99,7 +102,6 @@ export default class ProjectList extends Vue {
     visible: false,
     // 控制工程类型字段显隐
     typeShow1: false,
-    typeShow2: false,
     typeShow3: false,
     form: {
       projectType: '',
@@ -110,7 +112,9 @@ export default class ProjectList extends Vue {
       overallFloorage: '',
       decorateArea: '',
       decorationInvestment: '',
-      totalMoney: ''
+      totalMoney: '',
+      figureWhoseInstitutions: '',
+      reviewNumbers: ''
     }
   };
 
@@ -150,18 +154,12 @@ export default class ProjectList extends Vue {
   }
 
   switchToDetails(row) {
-    if (row.projectType == "建筑工程") {
-      this.dialog.typeShow1 = true;
-      this.dialog.typeShow2 = false;
-      this.dialog.typeShow3 = false;
-    } else if (row.projectType == "装修工程") {
+    if (row.projectType == "市政工程") {
       this.dialog.typeShow1 = false;
-      this.dialog.typeShow2 = true;
-      this.dialog.typeShow3 = false;
-    } else {
-      this.dialog.typeShow1 = false;
-      this.dialog.typeShow2 = false;
       this.dialog.typeShow3 = true;
+    } else {
+      this.dialog.typeShow1 = true;
+      this.dialog.typeShow3 = false;
     }
     Http.get("api/project/detail?id=" + row.id).then((res: any) => {
       this.dialog.visible = true;
