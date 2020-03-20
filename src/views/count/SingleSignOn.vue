@@ -33,6 +33,8 @@
     code: string = '';
     projectCode: string = '';
     projectSubCode: string = '';
+    loginName: string = '';
+    systemCode: string = '';
     amUrl: string = '';
 
 
@@ -48,6 +50,8 @@
     // 请求表格数据
     getTestMessages() {
       this.code = this.$route.query.tokenId;
+      this.loginName = this.$route.query.loginName;
+      this.systemCode = this.$route.query.systemCode;
       if (this.$route.query.projectCode) {
         this.projectCode = this.$route.query.projectCode;
       }
@@ -57,7 +61,7 @@
       if (this.$route.query.amUrl) {
         this.amUrl = this.$route.query.amUrl;
       }
-      let url = "api/token?token=" + this.code;
+      let url = "api/token?token=" + this.code + "&loginName=" + loginName + "&systemCode=" + systemCode;
       this.$axios({
         method: "get",
         url: url
