@@ -61,7 +61,7 @@
       if (this.$route.query.amUrl) {
         this.amUrl = this.$route.query.amUrl;
       }
-      let url = "api/token?token=" + this.code + "&loginName=" + loginName + "&systemCode=" + systemCode;
+      let url = "api/token?token=" + this.code + "&loginName=" + this.loginName + "&systemCode=" + this.systemCode;
       this.$axios({
         method: "get",
         url: url
