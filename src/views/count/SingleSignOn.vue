@@ -88,9 +88,7 @@
             type: 'error',
             message: res.data.message,
             onClose: () => {
-              if (this.amUrl != '') {
-                window.location.href = this.amUrl;
-              }
+              this.$router.push('/login');
             }
           });
         }
