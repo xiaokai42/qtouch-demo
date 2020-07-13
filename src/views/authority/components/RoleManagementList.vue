@@ -128,7 +128,14 @@ export default class RoleManagementList extends Vue {
   }
 
   // 删除角色
-  handleDelete(item: any) {}
+  handleDelete(item: any) {
+    Http.get(Url.auth.deleteRole+"/"+item.id).then((res: any) => {
+      if (res.data.status) {
+        this.$message.success("删除成功");
+        this.getTableData();
+      }
+    });
+  }
 
   handleEditNav(item: any) {
     this.$emit("showNav", item);
