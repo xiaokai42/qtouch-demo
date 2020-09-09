@@ -42,7 +42,9 @@
     { "value": "306", "label": "垫江县" },
     { "value": "307", "label": "梁平县" },
     { "value": "308", "label": "城口县" },
-    { "value": "309", "label": "云阳县" }
+    { "value": "309", "label": "云阳县" },
+    { "value": "310", "label": "奉节县" },
+    { "value": "311", "label": "巫山县" }
   ]
 }, {
   "value": "400",
