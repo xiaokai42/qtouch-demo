@@ -1,4 +1,12 @@
-[{
+[
+  {
+    "value": "10",
+    "label": "重庆市",
+    "children": [
+      { "value": "0", "label": "重庆市" }
+    ]
+  },
+  {
   "value": "100",
   "label": "主城区",
   "children": [
