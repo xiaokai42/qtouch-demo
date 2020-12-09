@@ -24,10 +24,10 @@
       <el-table-column prop="projectName" label="项目名称" show-overflow-tooltip></el-table-column>
       <el-table-column prop="developmentOrganization" label="建设单位" show-overflow-tooltip></el-table-column>
       <el-table-column prop="architect" label="设计单位" show-overflow-tooltip></el-table-column>
-      <el-table-column prop="projectType" label="项目类型"></el-table-column>
+      <el-table-column prop="projectType" label="项目类型" width="90"></el-table-column>
       <el-table-column prop="area" label="区域" width="120"></el-table-column>
       <el-table-column prop="city" label="区县" width="100"></el-table-column>
-      <!-- <el-table-column prop="createTime" label="创建时间" width="90"></el-table-column> -->
+      <el-table-column prop="status" label="办理状态" width="90"></el-table-column>
       <el-table-column prop="receiveTime" label="受理时间" width="90"></el-table-column>
       <el-table-column prop="finishTime" label="审批时间" width="90"></el-table-column>
       <el-table-column align="center" label="操作" width="80">
