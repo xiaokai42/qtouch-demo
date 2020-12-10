@@ -56,6 +56,8 @@
       <el-table-column label="消防设计审查数">
       	<el-table-column prop="acceptCount" width="90" label="受理/件"></el-table-column>
       	<el-table-column prop="acceptMeetCount" width="90" label="办结个数/件"></el-table-column>
+        <el-table-column prop="busistateGrantlicense" label="准予许可件个数" width="110"></el-table-column>
+        <el-table-column prop="busistateNolicense" label="不予许可件个数" width="110"></el-table-column>
       </el-table-column>
     </el-table>
     <!-- 打印格式 -->
@@ -99,6 +101,8 @@
         <el-table-column label="消防设计审查数">
         	<el-table-column prop="acceptCount" label="受理/件" width="80"></el-table-column>
         	<el-table-column prop="acceptMeetCount" label="办结个数/件" width="110"></el-table-column>
+          <el-table-column prop="busistateGrantlicense" label="准予许可件个数" width="110"></el-table-column>
+          <el-table-column prop="busistateNolicense" label="不予许可件个数" width="110"></el-table-column>
         </el-table-column>
       </el-table>
     </section>

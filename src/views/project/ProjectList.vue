@@ -12,6 +12,11 @@
       </el-date-picker>
       <el-cascader v-model="pagination.query.city" :options="regions" :show-all-levels="false" size="small"
         :props="{ expandTrigger: 'hover', emitPath: false }" placeholder="区县" clearable filterable></el-cascader>
+      <el-input v-model="pagination.query.projectName" clearable size="small" placeholder="项目名称"></el-input>
+      <el-select v-model="pagination.query.status" clearable size="small">
+        <el-option label="准予许可" value="准予许可"></el-option>
+        <el-option label="不予许可" value="不予许可"></el-option>
+      </el-select>
       <el-button size="small" icon="el-icon-search" @click="getTableList">查询</el-button>
     </div>
     <el-table :data="tableData" height="calc(100vh - 300px)" v-loading="loading"
@@ -94,7 +99,9 @@ export default class ProjectList extends Vue {
       city: '',
       beginTime: '',
       endTime: '',
-      projectType: ''
+      projectType: '',
+      projectName: '',
+      status: ''
     }
   };
   dialog: any = {
@@ -176,7 +183,10 @@ export default class ProjectList extends Vue {
   .box-header {
     display: flex;
     flex-wrap: wrap;
-    .el-date-editor,.el-cascader,
+    .el-input {
+      width: auto;
+    }
+    .el-input,.el-select,.el-date-editor,.el-cascader,
     .el-checkbox-group,.el-button {
       margin-right: 20px;
       margin-bottom: 20px;
