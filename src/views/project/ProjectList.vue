@@ -17,7 +17,8 @@
         <el-option label="准予许可" value="准予许可"></el-option>
         <el-option label="不予许可" value="不予许可"></el-option>
       </el-select>
-      <el-button size="small" icon="el-icon-search" @click="getTableList">查询</el-button>
+      <el-button size="small" icon="el-icon-search" @click="getTableList" style="margin-right: 0;">查询</el-button>
+      <el-button size="small" icon="el-icon-notebook-2" @click="excel" :loading="doLoading" style="margin-right: 0;">导出</el-button>
     </div>
     <el-table :data="tableData" height="calc(100vh - 300px)" v-loading="loading"
       size="mini" stripe style="width: 100%; text-align: center">
@@ -71,6 +72,7 @@ import cityJson from "@/assets/json/city.json";
 import Http from "@/utils/Http";
 import Utils from "@/utils/utils";
 import Url from "@/api/url";
+import store from "@/store";
 
 @Component({
   components: {},
@@ -82,6 +84,7 @@ import Url from "@/api/url";
 
 export default class ProjectList extends Vue {
   loading: Boolean = false;
+  doLoading: Boolean = false;
   tableData: any = [];
   // el-date-picker时间段选择控件返回值-[beginingTime, endingTime]
   date: any[] = [];
@@ -171,6 +174,38 @@ export default class ProjectList extends Vue {
     Http.get("api/project/detail?id=" + row.id).then((res: any) => {
       this.dialog.visible = true;
       Utils.mapValue(this.dialog.form, res.data.data);
+    });
+  }
+
+  excel() {
+    this.doLoading = true;
+    this.$axios({
+      method: "get",
+      url: "api/excel/download/info",
+      responseType: "blob",
+      params: this.pagination.query,
+      headers: {
+        "X-Requested-With": "XMLHttpRequest",
+        accessToken: "Bearer " + store.getters[`getToken`],
+        "Content-Type": "multipart/form-data"
+      }
+    }).then((res: any) => {
+      this.doLoading = false;
+      if (res.status) {
+         if (navigator.msSaveBlob) {
+          return navigator.msSaveBlob(new Blob([res.data]), '项目统计.xlsx');// IE
+        } else {
+          let blob = new Blob([res.data], {type: 'application/octet-stream;charset=UTF-8'})
+          let downloadElement = document.createElement('a');
+          let href = window.URL.createObjectURL(blob);
+          downloadElement.href = href;
+          downloadElement.download = '项目统计.xlsx';
+          document.body.appendChild(downloadElement);
+          downloadElement.click();
+          document.body.removeChild(downloadElement);
+          window.URL.revokeObjectURL(href);
+        }
+      }
     });
   }
 }
