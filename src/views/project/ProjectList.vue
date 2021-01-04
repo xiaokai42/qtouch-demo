@@ -193,13 +193,13 @@ export default class ProjectList extends Vue {
       this.doLoading = false;
       if (res.status) {
          if (navigator.msSaveBlob) {
-          return navigator.msSaveBlob(new Blob([res.data]), '项目统计.xlsx');// IE
+          return navigator.msSaveBlob(new Blob([res.data]), '重庆市建设工程消防设计审查项目统计主要信息.xlsx');// IE
         } else {
           let blob = new Blob([res.data], {type: 'application/octet-stream;charset=UTF-8'})
           let downloadElement = document.createElement('a');
           let href = window.URL.createObjectURL(blob);
           downloadElement.href = href;
-          downloadElement.download = '项目统计.xlsx';
+          downloadElement.download = '重庆市建设工程消防设计审查项目统计主要信息.xlsx';
           document.body.appendChild(downloadElement);
           downloadElement.click();
           document.body.removeChild(downloadElement);
