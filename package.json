@@ -8,7 +8,7 @@
   },
   "dependencies": {
     "@types/qs": "^6.5.2",
-    "axios": "^0.18.0",
+    "axios": "^0.21.1",
     "echarts": "^4.2.1",
     "element-ui": "^2.10.1",
     "iview": "3.1.2",
